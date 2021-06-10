@@ -1,9 +1,3 @@
-# 如果是发布到自定义域名
-echo 'cs-review.cn' > CNAME
-
-git init
-git config user.name "WosAlan"
-git config user.email "806452789@qq.com"
 git add -A
 git commit -m '更新了样式'
 
