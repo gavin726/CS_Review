@@ -33,7 +33,7 @@
 ## Java基础
 
 - [Java集合必会14问](https://zhuanlan.zhihu.com/p/40760616)
-- [Java基础面试题汇总](/java/java基础/基础面试题.md)
+- [Java基础题问答](/java/java基础/基础面试题.md)
 - [框架设计的灵魂——反射机制](https://mp.weixin.qq.com/s/SYT5sOUUvt4zkV113yODvQ)
 - [Object类](/Java/java基础/Object类.md)
 - [String类](/Java/java基础/String类.md)

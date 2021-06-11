@@ -10,13 +10,26 @@
   
  
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_2540255_2uu7pg0v3e4.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2575694_xd8g36sjikg.css">
    <!--网页标题左侧显示-->
   <link rel="icon" href="_media/logo4.png" type="image/x-icon">
   <!--自定义css-->
   <link rel="stylesheet" type="text/css" href="style/me-light.css">
 </head>
 <body>
+  <nav>
+    <ul><li><a href="#/README"><i class="iconfont icon-home"></i> 主页</a></li></ul>
+    <ul>
+      <li>
+        <p><i class="iconfont icon-history"></i> 记录</p>
+        <ul><li><a href="#/必看/阅读清单.md">阅读清单</a></li>
+          <li><a href="#/必看/阅读清单.md">掘金</a></li>
+        </ul>
+        
+      </li>
+    </ul>
+    
+  </nav>
   <div id="app">🚄🚄🚄页面加载中</div>
   <a class="to-top">top</a>
   <script>
@@ -25,7 +38,7 @@
       repo: '',
 	  loadSidebar: false,
 	  subMaxLevel: 3,
-	  loadNavbar: true,
+	  //loadNavbar: true,
 	  coverpage: true,
 	  search:'auto',
 	  

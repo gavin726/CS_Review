@@ -73,14 +73,15 @@ section.cover .cover-main {
 }
 /* 行代码块 */
 .markdown-section code {
-    font-size: 14px;
+    font-size: 16px !important;
     font-family: Consolas, monospace, serif;
     white-space: nowrap;
     padding: 0 4px;
     border-radius: 3px;
     background: rgb(247, 247, 247);
     white-space: normal;
-    color: rgb(173, 141, 229);
+    color: #f27474;
+    font-weight: bolder;
     
 }
 
@@ -208,8 +209,8 @@ section.cover.has-mask .mask {
 
 /* 引用块 */
 .markdown-section blockquote{
-    background: rgb(220, 220, 255);
-    padding:10px;
+    background: #eceaed;
+    padding: 10px;
     border-radius:10px;
 }
 /* 代码块 */
