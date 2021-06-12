@@ -148,7 +148,8 @@ h1 span{
 .markdown-section hr {
     border: none;
     border-bottom: 2px solid rgb(247, 247, 247) !important;
-    margin: 2em 0;
+    margin-top: .5em;
+    margin-bottom: 2em;
 }
 /* 标题颜色 */
 .markdown-section h2 span, .markdown-section h3 span, .markdown-section h4 span,.markdown-section h5 span{
