@@ -1,5 +1,5 @@
 git add -A
-git commit -m '更新了样式'
+git commit -m '更新了Java虚拟机部分'
 
 # 如果你想要部署到 coding上
 # .ssh -> config -> nodeing666 对应e.coding.net

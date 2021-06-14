@@ -35,8 +35,6 @@
 ## Java基础
 - [Java集合必会14问](https://zhuanlan.zhihu.com/p/40760616)
 - [Java基础题问答](/Java/Java基础/基础面试题.md)
-- [框架设计的灵魂——反射机制](https://mp.weixin.qq.com/s/SYT5sOUUvt4zkV113yODvQ)
-- [Object类](/Java/Java基础/Object类.md)
 - [String类](/Java/Java基础/String类.md)
 - [异常处理机制](/Java/Java基础/Exception.md)
 
@@ -50,18 +48,18 @@
 
 
 ## Java虚拟机 
-- [一文让你不再畏惧Java类加载机制](https://zhuanlan.zhihu.com/p/352186957)
-- [原来运行时内存分区长这个样子！](/Java/Java虚拟机/运行时数据区.md)
-- [JVM的垃圾回收机制，你了解了吗？](/Java/Java虚拟机/垃圾回收.md)
+- [Java类加载机制](/Java/Java虚拟机/类加载机制.md)
+- [运行时内存分区！](/Java/Java虚拟机/运行时数据区.md)
+- [垃圾回收机制](/Java/Java虚拟机/垃圾回收.md)
 - [说说内存泄漏/溢出、强软弱虚引用](/Java/Java虚拟机/几个概念.md)
 - [垃圾回收器该如何选择？](/Java/Java虚拟机/垃圾回收器.md)
 
 ## Java并发
 - [线程简介](/Java/JUC/线程简介.md)
 - [线程同步和通信](/Java/JUC/线程同步和通信.md)
-- [线程池你知道吗?](/Java/JUC/线程池.md)
+- [<font color="#CC5595">线程池</font>](/Java/JUC/线程池.md)  ❗❗❗
 - [Synchronized和ReentrantLock底层原理](/Java/JUC/S和R底层原理.md)
-- [Java中的这些锁你都理解了吗?](/Java/JUC/锁.md)
+- [🔒 锁](/Java/JUC/锁.md)
 - [手写一个BlockingQueue](/Java/JUC/阻塞队列.md)
 - [ThreadLoacl大揭秘](/Java/JUC/ThreadLocal.md)
 - [一文搞懂JMM和Volatile是什么](/Java/JUC/JMM和Volatile.md)
@@ -70,10 +68,10 @@
 <hr>
 
 ## MySQL
-- [全面了解MySQL的执行原理](https://zhuanlan.zhihu.com/p/352436463)
-- [并发事务带来了什么问题？](/MySQL/并发事务.md)
-- [MySQL的锁机制，你了解吗？](/MySQL/锁机制.md)
-- [一文让你认识MySQL中的索引](/MySQL/索引.md)
+- [全面了解MySQL的执行原理](/MySQL/执行原理.md)
+- [并发事务](/MySQL/并发事务.md)
+- [🔒 锁机制](/MySQL/锁机制.md)
+- [索引](/MySQL/索引.md) 🎯
 - [SQL优化最干货总结](https://mp.weixin.qq.com/s/4P_sPFbf20etv4TrHgCifA)
 - [MVCC多版本控制](https://www.jianshu.com/p/8845ddca3b23)
 
