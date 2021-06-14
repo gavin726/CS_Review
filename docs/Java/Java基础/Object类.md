@@ -1,7 +1,7 @@
 # Object类
-::: tip
+
 Java中有一个比较特殊的类，就是 Object类，它是所有类的父类，如果一个类没有使用extends关键字明确标识继承另外一个类，那么这个类就默认继承 Object类。因此，Object类是 Java 类层中的最高层类，是所有类的超类。换句话说，Java 中任何一个类都是它的子类。由于所有的类都是由 Object类衍生出来的，所以 Object类中的方法适用于所有类。
-:::
+
 ## 方法介绍
 
 ![image-20210304082936402](https://gitee.com/lgaaip/img/raw/master/20210304082944.png)
