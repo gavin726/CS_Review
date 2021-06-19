@@ -15,8 +15,10 @@
 - [Tok问题](/xxx)
 - [股票买卖问题]()
 
-
 ## 🎯 剑指offer系列
-- [题解传送门](https://blog.nowcoder.net/zhuanlan/LMVJnM)
 
+> [!WARNING]
+> 题号对应牛客网 《剑指offer》系列
+
+- [JZ31-40](/剑指offer/JZ31-40.md)
 
