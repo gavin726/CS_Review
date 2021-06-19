@@ -1,4 +1,4 @@
-## Netty 的介绍 
+## 一、Netty 的介绍 
 
 1) Netty 是由 JBOSS 提供的一个 **Java** **开源框架**，现为 **Github** **上的独立项目**。 
 
@@ -12,9 +12,9 @@
 
 
 
-## Java BIO编程
+## 二、Java BIO编程
 
-### I/O 模型 
+### 1、I/O 模型 
 
 ####  I/O 模型基本说明 
 
@@ -32,7 +32,7 @@
 
 5) Java AIO(NIO.2) ： 异步非阻塞，AIO 引入异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效 的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较 多且连接时间较长的应用
 
-### BIO、NIO、AIO 适用场景分析 
+### 2、BIO、NIO、AIO 适用场景分析 
 
 1) BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，但程序简单易理解。 
 
@@ -42,10 +42,126 @@
 
 
 
-### Java BIO 基本介绍 
+### 3、Java BIO 基本介绍 
 
 1) Java **BIO** 就是传统的 **java io** **编程**，其相关的类和接口在 java.io 
 
 2) BIO(**blocking I/O**) ： 同步阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需 要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，可以通过线程池机制改善(实 现多个客户连接服务器)。 
 
 3) BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4 以前的唯一选择，程序简单易理解 
+
+
+
+### 4、Java BIO 工作机制
+
+**对** **BIO** **编程流程的梳理** 
+
+1) 服务器端启动一个 ServerSocket 
+
+2) 客户端启动 Socket 对服务器进行通信，默认情况下服务器端需要对每个客户 建立一个线程与之通讯尚硅谷 Netty 核心技术及源码剖析 
+
+3) 客户端发出请求后, 先咨询服务器是否有线程响应，如果没有则会等待，或者被拒绝 
+
+4) 如果有响应，客户端线程会等待请求结束后，在继续执行
+
+
+
+### 5、Java BIO 应用实例
+
+实例说明： 
+
+1) 使用 BIO 模型编写一个服务器端，监听 6666 端口，当有客户端连接时，就启动一个线程与之通讯。 
+
+2) 要求使用线程池机制改善，可以连接多个客户端. 
+
+3) 服务器端可以接收客户端发送的数据(telnet 方式即可)。
+
+```java
+package com.alan.bio;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * @Author Alan
+ * @Date 2021/6/19 19:38
+ * @Description
+ * @Version 1.0
+ */
+public class BIOServer {
+    private final static Logger logger = LoggerFactory.getLogger(BIOServer.class);
+
+    public static void main(String[] args) throws IOException {
+
+        // 线程池
+        ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
+        // 创建 ServerSocket
+        ServerSocket serverSocket = new ServerSocket(6666);
+        logger.info("服务器启动....");
+        while(true){
+            logger.warn("等待客户端连接....");
+            final Socket socket = serverSocket.accept();
+            logger.warn("连接到一个客户端....");
+            newCachedThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    handler(socket);
+                }
+            });
+        }
+    }
+
+    private static void handler(Socket socket) {
+        try {
+            byte[] bytes = new byte[1024];
+            InputStream inputStream = socket.getInputStream();
+
+            // 循环读取客户端的消息
+            while(true){
+                int read = inputStream.read(bytes);
+                if (read != -1){
+                    logger.info(new String(bytes,0,read));
+                }else{
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                logger.warn("关闭客户端连接....");
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
+
+```
+
+使用 `telnet` 连接到服务端
+
+![image-20210619195415399](https://gitee.com/lgaaip/img/raw/master/image-20210619195415399.png)
+
+使用 `send` 发送消息
+
+![image-20210619195457842](https://gitee.com/lgaaip/img/raw/master/image-20210619195457842.png)
+
+### 6、Java BIO 问题分析
+
+1) 每个请求都需要创建独立的线程，与对应的客户端进行数据 Read，业务处理，数据 Write 。
+
+2) 当并发数较大时，需要创建大量线程来处理连接，系统资源占用较大。 
+
+3) 连接建立后，如果当前线程暂时没有数据可读，则线程就阻塞在 Read 操作上，造成线程资源浪费
+
+## 三、Java NIO编程
