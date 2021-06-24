@@ -53,6 +53,7 @@
 - [垃圾回收机制](/Java/Java虚拟机/垃圾回收.md)
 - [说说内存泄漏/溢出、强软弱虚引用](/Java/Java虚拟机/几个概念.md)
 - [垃圾回收器该如何选择？](/Java/Java虚拟机/垃圾回收器.md)
+- [<font color="#CC5595">重点:</font>Java虚拟机实战](/Java/Java虚拟机/JVM实战.md)❗❗❗❗❗❗
 
 ## Java并发
 - [线程简介](/Java/JUC/线程简介.md)
