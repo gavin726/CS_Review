@@ -607,3 +607,187 @@ public class ScatteringAndGatheringTest {
 
 ```
 
+### 6、Selector(选择器)
+
+#### ① 基本介绍 
+
+1) Java 的 NIO，用非阻塞的 IO 方式。可以用一个线程，处理多个的客户端连接，就会使用到 Selector(选择器) 
+
+2) Selector 能够检测多个注册的通道上是否有事件发生(注意:多个 Channel 以事件的方式可以注册到同一个 Selector)，如果有事件发生，便获取事件然后针对每个事件进行相应的处理。这样就可以只用一个单线程去管理多个通道，也就是管理多个连接和请求。【示意图】 
+
+3) **只有在 连接/通道 真正有读写事件发生时，才会进行读写，就大大地减少了系统开销，并且不必为每个连接都 创建一个线程，不用去维护多个线程** 
+
+4) 避免了多线程之间的上下文切换导致的开销
+
+#### ② Selector 示意图和特点说明
+
+![image-20210627164312819](https://gitee.com/lgaaip/img/raw/master/image-20210627164312819.png)
+
+1) Netty 的 IO 线程 NioEventLoop 聚合了 Selector(选择器，也叫多路复用器)，可以同时并发处理成百上千个客 户端连接。 
+
+2) 当线程从某客户端 Socket 通道进行读写数据时，若没有数据可用时，该线程可以进行其他任务。 
+
+3) 线程通常将非阻塞 IO 的空闲时间用于在其他通道上执行 IO 操作，所以单独的线程可以管理多个输入和输出 通道。 
+
+4) 由于读写操作都是非阻塞的，这就可以充分提升 IO 线程的运行效率，避免由于频繁 I/O 阻塞导致的线程挂 起。 
+
+5) 一个 I/O 线程可以并发处理 N 个客户端连接和读写操作，这从根本上解决了传统同步阻塞 I/O 一连接一线 程模型，架构的性能、弹性伸缩能力和可靠性都得到了极大的提升。
+
+#### ③ Selector 类相关方法
+
+Selector 类是一个抽象类, 常用方法和说明如下: 
+
+![image-20210627165523027](https://gitee.com/lgaaip/img/raw/master/image-20210627165523027.png)
+
+**注意事项**
+
+1) NIO 中的 ServerSocketChannel 功能类似 ServerSocket，SocketChannel 功能类似 Socket
+
+2) selector 相关方法说明 
+
+​	selector.select()//阻塞 
+
+​	selector.select(1000);//阻塞 1000 毫秒，在 1000 毫秒后返回 
+
+​	selector.wakeup();//唤醒 selector 
+
+​	selector.selectNow();//不阻塞，立马返还
+
+
+
+#### ④ NIO 非阻塞 网络编程原理分析图
+
+NIO 非阻塞 网络编程相关的(Selector、SelectionKey、ServerScoketChannel 和 SocketChannel) 关系梳理图
+
+![image-20210627165626743](https://gitee.com/lgaaip/img/raw/master/image-20210627165626743.png)
+
+对上图的说明: 
+
+1) 当客户端连接时，会通过 ServerSocketChannel 得到 SocketChannel 
+
+2) Selector 进行监听 select 方法, 返回有事件发生的通道的个数
+
+3) 将 socketChannel 注册到 Selector 上, register(Selector sel, int ops), 一个 selector 上可以注册多个 SocketChannel 
+
+4) 注册后返回一个 SelectionKey, 会和该 Selector 关联(集合) 
+
+5) 进一步得到各个 SelectionKey (有事件发生) 
+
+6) 在通过 SelectionKey 反向获取 SocketChannel , 方法 channel() 
+
+7) 可以通过 得到的 channel , 完成业务处理 
+
+
+
+#### ⑤ NIO 非阻塞 网络编程快速入门 
+
+案例要求: 
+
+1) 编写一个 NIO 入门案例，实现服务器端和客户端之间的数据简单通讯（非阻塞） 
+
+2) 目的：理解 NIO 非阻塞网络编程机制 
+
+**NIO服务端：**
+
+```java
+public class NIOServer {
+
+    public static void main(String[] args) throws Exception{
+
+        // 创建ServerSocketChannel -> ServerSocket
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+
+        // 得到一个Selector对象
+        Selector selector = Selector.open();
+
+        // 绑定一个端口6666，在服务端监听
+        serverSocketChannel.socket().bind(new InetSocketAddress(6666));
+        // 设置为非阻塞
+        serverSocketChannel.configureBlocking(false);
+
+        // 把serverSocketChannel注册到 selector 关心 事件为 OP_ACCEPT
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+        // 循环等待客户端连接
+        while (true){
+            // 这里等待1s，如果没有事件发生，返回
+            if (selector.select(1000) == 0){
+                System.out.println("服务器等待了1s，无连接~");
+                continue;
+            }
+
+            // 如果返回的大于0,获取到相关的selection集合
+            // 1、如果返回大于0，表示已经获取到关注的事件
+            // 2、selector.selectedKeys() 返回关注事件的集合
+            //   通过selectionKeys反向获取通道
+            Set<SelectionKey> selectionKeys = selector.selectedKeys();
+            // 使用迭代器遍历 selectionKeys
+            Iterator<SelectionKey> keyIterator = selectionKeys.iterator();
+
+            while (keyIterator.hasNext()){
+                // 获取到selectionKey
+                SelectionKey key = keyIterator.next();
+                // 根据key对应的通道发生的事件做不同的处理
+                if (key.isAcceptable()){  // 如果是 OP_ACCEPT，有新的客户端连接我
+                    // 给该客户端生成一个SocketChannel
+                    SocketChannel socketChannel = serverSocketChannel.accept();
+                    // socketChannel设置为非阻塞
+                    socketChannel.configureBlocking(false);
+                    System.out.println("客户端连接成功 生成一个SocketChannel"+socketChannel.hashCode());
+                    // 将socketChannel注册到selector,关注事件为 OP_READ
+                    // 同时给 socketChannel 关联一个buffer
+                    socketChannel.register(selector,SelectionKey.OP_READ, ByteBuffer.allocate(1024));
+
+                }
+
+                if (key.isReadable()){  // 发生读事件
+                    // 通过key反向获取到对应的channel
+                    SocketChannel channel = (SocketChannel) key.channel();
+                    // 获取到该channel关联的buffer
+                    ByteBuffer buffer = (ByteBuffer) key.attachment();
+                    channel.read(buffer);
+                    System.out.println("form 客户端"+new String(buffer.array()));
+                }
+                // 手动从集合中移除当前的selectionKey，防止重复操作
+                keyIterator.remove();
+            }
+        }
+    }
+}
+
+```
+
+**NIO客户端**
+
+```java
+public class NIOClient {
+    public static void main(String[] args) throws Exception{
+
+        // 得到一个网络通道
+        SocketChannel socketChannel = SocketChannel.open();
+        // 设置非阻塞模式
+        socketChannel.configureBlocking(false);
+        // 提供服务器端的ip和端口
+        InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1", 6666);
+
+        // 连接服务器
+        if (!socketChannel.connect(inetSocketAddress)){
+            while (!socketChannel.finishConnect()){
+                System.out.println("因为连接需要事件,客户端不会阻塞,可以做其它工作..");
+            }
+        }
+
+        // 如果连接成功,就发送数据
+        String str = "hello,NIO";
+        // 不需要指定大小，自动生成成字节数组长度一直的ByteBuffer
+        ByteBuffer buffer = ByteBuffer.wrap(str.getBytes());
+
+        // 发送数据，将buffer数据写入channel
+        socketChannel.write(buffer);
+        System.in.read();
+
+    }
+}
+
+```
+
