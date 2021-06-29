@@ -1140,3 +1140,112 @@ public static void main(String[] args) throws Exception{
 ![image-20210629100011666](https://gitee.com/lgaaip/img/raw/master/image-20210629100011666.png)
 
 ![image-20210629100047666](https://gitee.com/lgaaip/img/raw/master/image-20210629100047666.png)
+
+
+
+## 四、NIO与零拷贝
+
+### 1、传统 IO 模型 
+
+![image-20210629161940770](https://gitee.com/lgaaip/img/raw/master/image-20210629161940770.png)
+
+`DMA: direct memory access 直接内存拷贝(不使用 CPU)`
+
+### 2、mmap 优化
+
+1) mmap 通过内存映射，将**文件映射到内核缓冲区**，同时，**用户空间可以共享内核空间的数据**。这样，在进行网络传输时，就可以减少内核空间到用户空间的拷贝次数。如下图 
+
+2) mmap 示意图
+
+![image-20210629162016720](https://gitee.com/lgaaip/img/raw/master/image-20210629162016720.png)
+
+### 3、sendFile 优化
+
+1) Linux 2.1 版本 提供了 sendFile 函数，其基本原理如下：数据根本不经过用户态，直接从内核缓冲区进入到 Socket Buffer，同时，由于和用户态完全无关，就减少了一次上下文切换 
+
+2) 示意图和小结
+
+![image-20210629162057398](https://gitee.com/lgaaip/img/raw/master/image-20210629162057398.png)
+
+3) 提示：零拷贝从操作系统角度，是没有 cpu 拷贝 
+
+4) Linux 在 2.4 版本中，做了一些修改，避免了从**内核缓冲区**拷贝到 **Socket buffer** 的操作，直接拷贝到协议栈， 从而再一次减少了数据拷贝。具体如下图和小结：
+
+![image-20210629162300953](https://gitee.com/lgaaip/img/raw/master/image-20210629162300953.png)
+
+5) 这里其实有 一次 cpu 拷贝 `kernel buffer -> socket buffer` 但是，拷贝的信息很少，比如 lenght , offset , 消耗低，可以忽略 
+
+### 4、零拷贝的再次理解
+
+1) 我们说零拷贝，是从**操作系统的角度**来说的。因为内核缓冲区之间，没有数据是重复的（只有 kernel buffer 有 一份数据）。 
+
+2) 零拷贝不仅仅带来更少的数据复制，还能带来其他的性能优势，例如更少的上下文切换，更少的 CPU 缓存伪 共享以及无 CPU 校验和计算。
+
+
+
+### 5、mmap 和 sendFile 的区别
+
+1) mmap 适合小数据量读写，sendFile 适合大文件传输。 
+
+2) mmap 需要 4 次上下文切换，3 次数据拷贝；sendFile 需要 3 次上下文切换，最少 2 次数据拷贝。 
+
+3) sendFile 可以利用 DMA 方式，减少 CPU 拷贝，mmap 则不能（必须从内核拷贝到 Socket 缓冲区）。
+
+
+
+### 6、NIO 零拷贝案例
+
+**服务端**
+
+```java
+public class NewIOServer {
+    public static void main(String[] args) throws Exception{
+        InetSocketAddress address = new InetSocketAddress(7001);
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        ServerSocket serverSocket = serverSocketChannel.socket();
+        serverSocket.bind(address);
+        //创建一个buffer
+        ByteBuffer byteBuffer = ByteBuffer.allocate(4096);
+        while (true){
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            int readCount = 0;
+            while (-1 != readCount){
+                try {
+
+                    readCount = socketChannel.read(byteBuffer);
+
+                }catch (Exception e){
+                    break;
+                    //e.printStackTrace();
+                }
+                //
+                byteBuffer.rewind(); // 倒带 position = 0; mark作废
+            }
+        }
+    }
+}
+
+```
+
+**客户端**
+
+```java
+public class NewIOClient {
+    public static void main(String[] args) throws Exception{
+        SocketChannel socketChannel = SocketChannel.open();
+        socketChannel.connect(new InetSocketAddress("localhost",7001));
+        String filename = "nio.zip";
+        // 得到一个文件channel
+        FileChannel fileChannel = new FileInputStream(filename).getChannel();
+        // 准备发送
+        long startTime = System.currentTimeMillis();
+        // 在linux下，一个transferTo方法就可以完成传输
+        // 在windows下，一次调用transferTo只能发送8m,就需要分段传输文件
+        // transferTo底层使用零拷贝
+        long transferCount = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
+        System.out.println("发送的总的字节数="+transferCount+"耗时:"+(System.currentTimeMillis()-startTime));
+        fileChannel.close();
+    }
+}
+```
+
