@@ -101,7 +101,8 @@
 ## Netty
 
 
-- [筑基期——详解Java BIO/NIO](/框架/Netty/Netty入门.md)
+- [筑基期——详解Java BIO/NIO](/框架/Netty/Netty筑基.md)
+- [金丹期——Netty入门模型详解](/框架/Netty/Netty入门.md)
 
 
 
