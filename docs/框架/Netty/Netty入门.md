@@ -216,7 +216,7 @@ Netty 对 JDK 自带的 NIO 的 API 进行了封装，解决了上述问题。
 
 ## 三、Netty 模型
 
-#### 1、工作原理-简单版
+### 1、工作原理-简单版
 
 Netty 主要基于主从 Reactors 多线程模型（如图）做了一定的改进，其中主从 Reactor 多线程模型有多个 Reactor
 
@@ -230,11 +230,11 @@ Netty 主要基于主从 Reactors 多线程模型（如图）做了一定的改�
 
 3) 当 Worker 线程监听到 selector 中通道发生自己感兴趣的事件后，就进行处理(就由 handler)， 注意 handler 已 经加入到通道 
 
-#### 2、工作原理-进阶版
+### 2、工作原理-进阶版
 
 ![image-20210704005111325](https://gitee.com/lgaaip/img/raw/master/image-20210704005111325.png)
 
-#### 3、工作原理-详细版
+### 3、工作原理-详细版
 
 ![image-20210704005158179](https://gitee.com/lgaaip/img/raw/master/image-20210704005158179.png)
 
@@ -268,7 +268,7 @@ Netty 主要基于主从 Reactors 多线程模型（如图）做了一定的改�
 
 8) 每个Worker NIOEventLoop 处理业务时，会使用pipeline(管道), pipeline 中包含了 channel , 即通过pipeline 可以获取到对应通道, 管道中维护了很多的 处理器 
 
-#### 4、Netty 快速入门实例-TCP 服务
+### 4、Netty 快速入门实例-TCP 服务
 
 1) Netty 服务器在 6668 端口监听，客户端能发送消息给服务器 "hello, 服务器~" 
 
