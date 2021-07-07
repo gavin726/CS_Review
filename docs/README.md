@@ -150,6 +150,8 @@
 
 ### Zookeeper
 
+- [zookeeper相关概念](/分布式/zookeeper入门.md)
+
 <br>
 
 <br>
@@ -159,7 +161,7 @@
 # 💪 项目
 <hr>
 
-- [CodeShare交流社区]()
+- [CodeShare交流社区](https://gitee.com/lgaaip/code-share)
 
 
 <br>
@@ -171,9 +173,9 @@
 
 ### Docker
 
-[docker入门](/必备/docker入门.md)
+- [docker入门](/必备/docker入门.md)
 
-[docker进阶](/必备/docker进阶.md)
+- [docker进阶](/必备/docker进阶.md)
 
 
 
