@@ -1,5 +1,38 @@
 # Docker入门
 
+**安装**（可看官网进行安装）
+
+```shell
+#1.卸载旧版本
+yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+#2.需要的安装包
+yum install -y yum-utils
+#3.设置镜像的仓库
+yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+#默认是从国外的，不推荐
+#推荐使用国内的
+yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+#更新yum软件包索引
+yum makecache fast
+#4.安装docker相关的 docker-ce 社区版 而ee是企业版
+yum install docker-ce docker-ce-cli containerd.io
+#5、启动docker
+docker systemctl start docker
+#6. 使用docker version查看是否按照成功
+docker version
+```
+
 ## 一、Docker的常用命令
 
 ### ① 帮助命令
