@@ -1,4 +1,4 @@
-<!--> [!NOTE|label:「写在前面」]
+<!-- {> [!NOTE|label:「写在前面」]
 >
 > <br>
 >
@@ -12,8 +12,8 @@
 >
 > 📖 作者维护的公众号<font color='cornflowerblue'>**《代码罐头》**</font>，欢迎大家前去关注！
 >
-> 
--->
+>  }-->
+
 ##  <!-- {docsify-ignore} -->
 
 # 💻 计算机基础 
