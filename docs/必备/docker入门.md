@@ -28,7 +28,7 @@ yum makecache fast
 #4.安装docker相关的 docker-ce 社区版 而ee是企业版
 yum install docker-ce docker-ce-cli containerd.io
 #5、启动docker
-docker systemctl start docker
+systemctl start docker
 #6. 使用docker version查看是否按照成功
 docker version
 ```
