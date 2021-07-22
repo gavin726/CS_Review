@@ -40,9 +40,9 @@
 
 
 ## Java容器
-- [面试篇——HashMap多连问](/java/java集合/HashMap.md)
-- [面试篇——List](/java/java集合/list.md)
-- [Java中最简单的集合类——List源码探究](/java/源码分析/list.md)
+- [面试篇——HashMap多连问](/Java/Java集合/Hashmap.md)
+- [面试篇——List](/Java/Java集合/list.md)
+- [Java中最简单的集合类——List源码探究](/Java/源码分析/list.md)
 - [HashMap源码探究看这篇就够了！](/Java/源码分析/hashmap7源码探究.md)
 
 
@@ -74,6 +74,7 @@
 - [🔒 锁机制](/MySQL/锁机制.md)
 - [索引](/MySQL/索引.md) 🎯
 - [SQL优化最干货总结](https://mp.weixin.qq.com/s/4P_sPFbf20etv4TrHgCifA)
+- [MVCC](/MySQL/MVCC.md)
 - [MVCC多版本控制](https://www.jianshu.com/p/8845ddca3b23)
 
 
