@@ -4,7 +4,7 @@
 
 > <font size="18">CS-Review</font>
 
-- 照亮学习编程的道路
+- 积跬步，至千里
 
 [GitHub](https://github.com/Alan-26/CS_Review)
 [开始阅读](README)
