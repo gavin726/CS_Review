@@ -6,6 +6,5 @@
 
 - 积跬步，至千里
 
-[GitHub](https://github.com/Alan-26/CS_Review)
 [开始阅读](README)
 
