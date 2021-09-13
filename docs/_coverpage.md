@@ -1,6 +1,6 @@
 <!-- 主页.md -->
 
-# CS-Review <small>3.5</small>
+# CS-Review 
 
 > 积跬步，至千里
 
