@@ -4,7 +4,7 @@
 
 > 积跬步，至千里
 
-![](_media/wbg.png)
 
 [开始阅读](README)
+[GitHub](https://github.com/docsifyjs/docsify/)
 
