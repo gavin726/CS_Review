@@ -1,4 +1,15 @@
-img {
+.cover-main img {
 	max-width: 60%
 	
+}
+.cover-main blockquote p{
+	font-family: cursive;
+}
+
+.sidebar>h1 .app-name-link {
+    color: var(--sidebar-name-color);
+    font-family: fantasy;
+}
+.markdown-section a{
+	color: crimson !important;
 }
