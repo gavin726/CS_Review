@@ -1,4 +1,4 @@
-# 线程基础知识
+# <font color='#667ee9'>线程基础知识</font>
 
 ## 1. 进程和线程的区别
 
@@ -378,7 +378,7 @@ Yield方法可以暂停当前正在执行的线程对象，让其它有相同优
 
 
 
-# 线程之间的同步和通信
+# <font color='#667ee9'>线程之间的同步和通信</font>
 
 ## 1. Java中如何实现线程同步
 
@@ -461,7 +461,7 @@ volatile可以保证线程可见性且提供了一定的有序性，但是无法
 
 
 
-# Java中的锁
+# <font color='#667ee9'>Java中的锁</font>
 
 ## 1. Synchronized
 
@@ -573,7 +573,7 @@ public class SynchronizedMethod {
 
 
 
-### JVM**对**synchronized的优化有哪些？
+### JVM对synchronized的优化有哪些？
 
 **① 锁膨胀**：无锁 -> 偏向锁 -> 轻量级锁 -> 重量级锁
 
@@ -808,7 +808,7 @@ b2版本号=>3
 
 
 
-# 线程池
+# <font color='#667ee9'>线程池</font>
 
 ## 1. 为什么要用线程池？
 
@@ -912,9 +912,9 @@ FixedThreadPool是一个典型且优秀的线程池，它具有线程池提高�
 
 
 
-# ThreadLocal
+# <font color='#667ee9'>ThreadLocal</font>
 
-## 简介
+## 1. 简介
 
 通常情况下，我们创建的变量是可以被任何⼀个线程访问并修改的。如果想实现每⼀个线程都有⾃⼰的专属本地变量该如何解决呢？ JDK 中提供的 ThreadLocal 类正是为了解决这样的问题。
 
@@ -932,7 +932,7 @@ FixedThreadPool是一个典型且优秀的线程池，它具有线程池提高�
 > 2. 传递数据: 我们可以通过ThreadLocal在同一线程，不同组件中传递公共变量
 > 3. 线程隔离: 每个线程的变量都是独立的，不会互相影响
 
-## 基本使用
+## 2. 基本使用
 
 **`几个常用的方法`**
 
@@ -1011,7 +1011,7 @@ public class Demo02 {
 
 > 这样不管程序运行多少次，都不会出现获取到错误数据的情况下，这样就<font color='red'>解决了线程之间数据隔离</font>的问题。
 
-## 对比synchronized
+## 3. 对比synchronized
 
 **测试**
 
@@ -1048,7 +1048,7 @@ public class Demo03 {
 >
 > 但是与ThreadLocal不一样的是，在这里我们是想强调每个线程之间的隔离性，而不是数据的共享性，所以当我们在强调线程隔离性的场景下，synchronized是不适用的。
 
-## 区别
+### 区别
 
 虽然ThreadLocal模式与synchronized关键字都用于处理多线程并发访问变量的问题, 不过<font color='orange'>两者处理问题的角度和思路</font>不同。
 
@@ -1060,7 +1060,7 @@ public class Demo03 {
 > 总结：
 > 在刚刚的案例中，虽然使用ThreadLocal和synchronized都能解决问题,但是使用ThreadLocal更为合适,因为这样可以使程序拥有更高的并发性。
 
-## 运用案例
+## 4. 运用案例
 
 > 数据库的事务操作中连接对象可能会导致不一致
 >
@@ -1080,7 +1080,7 @@ public class Demo03 {
 >
 > 使用ThreadLoacl，绑定connection
 
-## ThreadLocal方案的好处
+## 5. ThreadLocal方案的好处
 
 从上述的案例中我们可以看到， 在一些特定场景下，ThreadLocal方案有两个突出的优势：
 
@@ -1319,7 +1319,7 @@ protected T initialValue() {
 
 （3）如果想要一个除null之外的初始值，可以重写此方法。（备注： 该方法是一个`protected`的方法，显然是为了让子类覆盖而设计的）
 
-## 弱引用和内存泄漏
+## 6. 弱引用和内存泄漏
 
  有些程序员在使用ThreadLocal的过程中会发现有内存泄漏的情况发生，就猜测这个内存泄漏跟Entry中使用了弱引用的key有关系。这个理解其实是不对的。
 

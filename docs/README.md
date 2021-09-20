@@ -35,7 +35,7 @@
 
 - [Java并发](/Java/Java并发)🎯
 
-- [Java虚拟机](/Java/Java虚拟机)<span data-v-73ca276e="" class="badge recommendation" style="vertical-align: base-line;">重构</span>
+- [Java虚拟机](/Java/Java虚拟机)
 
 
 
