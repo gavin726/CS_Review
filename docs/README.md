@@ -29,41 +29,15 @@
 
 <br>
 
-# ☕ 关于Java
-<hr>
+# ☕ Java
 
-## Java基础
-- [Java集合必会14问](https://zhuanlan.zhihu.com/p/40760616)
-- [Java基础题问答](/Java/Java基础/基础面试题.md)
-- [String类](/Java/Java基础/String类.md)
-- [异常处理机制](/Java/Java基础/Exception.md)
+- [Java基础](/Java/Java基础)
 
+- [Java并发](/Java/Java并发)🎯
 
-## Java容器
-- [面试篇——HashMap多连问](/Java/Java集合/Hashmap.md)
-- [面试篇——List](/Java/Java集合/list.md)
-- [Java中最简单的集合类——List源码探究](/Java/源码分析/list.md)
-- [HashMap源码探究看这篇就够了！](/Java/源码分析/hashmap7源码探究.md)
+- [Java虚拟机](/Java/Java虚拟机)<span data-v-73ca276e="" class="badge recommendation" style="vertical-align: base-line;">重构</span>
 
 
-
-## Java虚拟机 
-- [Java类加载机制](/Java/Java虚拟机/类加载机制.md)
-- [运行时内存分区！](/Java/Java虚拟机/运行时数据区.md)
-- [垃圾回收机制](/Java/Java虚拟机/垃圾回收.md)
-- [说说内存泄漏/溢出、强软弱虚引用](/Java/Java虚拟机/几个概念.md)
-- [垃圾回收器该如何选择？](/Java/Java虚拟机/垃圾回收器.md)
-- [<font color="#CC5595">重点:</font>Java虚拟机实战](/Java/Java虚拟机/JVM实战.md)❗❗❗❗❗❗
-
-## Java并发
-- [线程简介](/Java/JUC/线程简介.md)
-- [线程同步和通信](/Java/JUC/线程同步和通信.md)
-- [<font color="#CC5595">线程池</font>](/Java/JUC/线程池.md)  ❗❗❗
-- [Synchronized和ReentrantLock底层原理](/Java/JUC/S和R底层原理.md)
-- [🔒 锁](/Java/JUC/锁.md)
-- [手写一个BlockingQueue](/Java/JUC/阻塞队列.md)
-- [ThreadLoacl大揭秘](/Java/JUC/ThreadLocal.md)
-- [一文搞懂JMM和Volatile是什么](/Java/JUC/JMM和Volatile.md)
 
 # 📝 数据库
 <hr>
@@ -177,7 +151,6 @@
 - [docker入门](/必备/docker入门.md)
 
 - [docker进阶](/必备/docker进阶.md)
-
 
 
 
