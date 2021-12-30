@@ -20,3 +20,18 @@ p a{
 	color: black !important;
 }
 
+.markdown-section blockquote {
+    overflow: visible;
+    margin: 2em 0;
+    padding: 1.5em;
+    border-radius: 5px;
+    border-width: var(--blockquote-border-width, 0);
+    background: #78cbf259;
+    color: var(--blockquote-color);
+    font-family: var(--blockquote-font-family);
+    font-size: var(--blockquote-font-size);
+    font-style: var(--blockquote-font-style);
+    font-weight: var(--blockquote-font-weight);
+    quotes: "“" "”" "‘" "’";
+	border-style: hidden
+}

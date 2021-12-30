@@ -5,6 +5,8 @@
 > 积跬步，至千里
 
 
+
 [开始阅读](README)
 [GitHub](https://github.com/docsifyjs/docsify/)
 
+![](_media/bg.jpg)
