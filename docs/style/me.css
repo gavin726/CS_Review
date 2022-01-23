@@ -1,5 +1,5 @@
 .cover-main img {
-	max-width: 60%
+	max-width: 20%
 	
 }
 .cover-main blockquote p{
@@ -10,14 +10,14 @@
     color: var(--sidebar-name-color);
     font-family: fantasy;
 }
-.markdown-section li a{
+/* .markdown-section li a{
 	color: crimson !important;
 }
 p a{
 	color: crimson !important;
-}
+} */
 .cover-main a{
-	color: black !important;
+	color: rgb(17, 14, 14) !important;
 }
 
 .markdown-section blockquote {
@@ -35,3 +35,5 @@ p a{
     quotes: "“" "”" "‘" "’";
 	border-style: hidden
 }
+
+
